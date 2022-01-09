@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  sdk:
+    build:
+      context: .
+      args:
+        username: ubuntu
+        uid: 1000
+    environment:
+      OPENWRT_SDK_IDENTIFIER: ${SDK_IDENTIFIER}
+      OPENWRT_SDK_DIR: /home/ubuntu/openwrt-sdk/${SDK_IDENTIFIER}
+      OPENWRT_SDK_URL: ${SDK_URL}
+      OPENWRT_SDK_SHA256SUM: ${SDK_SHA256SUM}
+    image: openwrt-sdk-${SDK_IDENTIFIER-generic}:v1.0
+    hostname: openwrt-${SDK_IDENTIFIER-generic}
+    volumes:
+      - type: bind
+        source: ./data/
+        target: /home/ubuntu/openwrt-sdk/
